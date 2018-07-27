@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Psychic Game
+  </title>
+</head>
+
+<body>
+
+  <div id="game">
+      <h1>The Psychic Game</h1>
+      <p>Guess what letter I am thinking of by <b>pressing one of the alphabet keys on your keyboard</b></p>
+      
+      <!-- <p>Your Guesses so far: </p> <span id="user"><strong> </strong></span> -->
+      <!-- <p>Computer Guess: </p> <span id="computer"><strong> </strong></span> -->
+      <h2>Wins: <span id="winId"><strong> </strong></span></h2>
+      <h2>Losses: <span id="lossId"><strong> </strong></span></h2>
+      
+      <h2>Already Guessed: </h2><span id = "displayUserGuessId"></span>
+      <h2>Guesses Left</h2><span id = "left"></span>
+
+
+  </div>
+
+  <script type="text/javascript">
+//      var your_array = [];
+
+// document.onkeydown = function (e) {
+//   var keyPress;
+
+//   if (typeof event !== 'undefined') {
+//     keyPress = event.keyCode;
+//   }
+//   else if (e) {
+//     keyPress = e.which;
+//   }
+
+//   your_array.push(String.fromCharCode(keyPress));
+
+//   return false;   // Prevents the default action
+//   var ug = document.getElementById("user");
+//       ug.textContent = your_array;
+
+// };
+
+    // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
+    var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var wins = 0;
+    var losses = 0;
+    var i=0;
+    var guessList = [];
+    var guesses = 5;
+    var flag = 0;
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    
+
+    // This function is run whenever the user presses a key.
+    document.onkeyup = function(event) {
+
+      // Determines which key was pressed.
+      var userGuess = event.key;
+      var userGuessLower = userGuess.toLowerCase();
+      console.log(userGuessLower);
+
+      for (var j=0; j< guessList.length; j++){
+
+        if(userGuessLower != guessList[j]){
+        flag = 0;
+        console.log("i am in if");
+        console.log(flag);
+        }
+        else{
+          flag = flag+1;
+          console.log ("i am in else");
+          console.log(flag);
+        }
+      
+      }
+
+      if(flag == 0){  
+        console.log("i am in if flag = 0");
+        guessList.push(userGuessLower);
+        console.log(guessList);
+       
+        
+        
+            if ((userGuessLower === computerGuess) && (guesses > 0)){
+                wins = wins+1;
+                alert ("You won!");
+                
+                guesses = 5;
+                guessList = [];
+            }
+            if ((userGuessLower === computerGuess) && (guesses == 0)){
+                wins = wins+1;
+                alert ("You won!");
+                
+                guesses = 5;
+                guessList = [];
+            }
+            if ((userGuessLower !== computerGuess) && (guesses > 0)){
+                alert("Oops!");
+                guesses = guesses - 1;
+            }
+            if ((guesses === 0) && (userGuessLower !== computerGuess)){
+              losses = losses +1;
+              alert ("Sorry! You lost. If you wish to quit close the browser tab.");
+              guesses = 5;
+              guessList = [];
+            }
+            var displayGuess = document.getElementById("displayUserGuessId");
+        displayGuess.textContent = guessList.join(', ');
+            var gLeft = document.getElementById("left");
+        gLeft.textContent = guesses;
+            
+      }
+      else if (flag !== 0){
+        alert("You already guessed this letter. Try a new one.");
+
+      }
+      
+        
+      
+      
+      console.log (" wins= " +wins+ " losses= " +losses);
+      var win = document.getElementById("winId");
+      win.textContent = wins;
+      var loss = document.getElementById("lossId");
+      loss.textContent = losses;
+      
+      
+    };
+   
+    // alert ("ties= " +ties);
+    // alert("wins= " +wins);
+    // alert("losses= " +losses);
+  </script>
+
+</body>
+
+</html>
