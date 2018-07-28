@@ -73,13 +73,15 @@
         }
         else{
           flag = flag+1;
+          break;
           console.log ("i am in else");
           console.log(flag);
+
         }
       
       }
 
-      if(flag == 0){  
+      if(flag === 0){  
         console.log("i am in if flag = 0");
         guessList.push(userGuessLower);
         console.log(guessList);
