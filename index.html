@@ -53,8 +53,12 @@
     var guessList = [];
     var guesses = 5;
     var flag = 0;
-    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    var computerGuess;
+    generateWord();
+    function generateWord(){
+    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
     console.log("compute guess is: " +computerGuess);
+    };
     
 
     // This function is run whenever the user presses a key.
@@ -92,14 +96,15 @@
             if ((userGuessLower === computerGuess) && (guesses > 0)){
                 wins = wins+1;
                 alert ("You won!");
-                
+                generateWord();
                 guesses = 5;
                 guessList = [];
+                
             }
             if ((userGuessLower === computerGuess) && (guesses == 0)){
                 wins = wins+1;
                 alert ("You won!");
-                
+                generateWord();
                 guesses = 5;
                 guessList = [];
             }
@@ -110,6 +115,7 @@
             if ((guesses === 0) && (userGuessLower !== computerGuess)){
               losses = losses +1;
               alert ("Sorry! You lost. If you wish to quit close the browser tab.");
+              generateWord();
               guesses = 5;
               guessList = [];
             }
